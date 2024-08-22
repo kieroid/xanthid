@@ -1,6 +1,6 @@
 Xanthid - an X11 window manager based on TinyWM
 ===============================================
-
+[![Unlicense](https://img.shields.io/badge/License-unlicense-black.svg)](https://choosealicense.com/licenses/unlicense/)<br/>
 hi thanks for reading this. this is a window manager im developing. it is based on tinywm which is made by nick welch.<br/>
 im making it public domain (for now) until i achieve something that is usable.<br/>
 for right now, this is primary nicks work, so he should get the recognition he deserves.<br/>
