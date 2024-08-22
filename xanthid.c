@@ -35,9 +35,7 @@
 
 /* initial static functions */
 static void die(const char *fmt, ...);
-/* static void grabkeys(void);*/
 static void setup(void);
-/*static void updatenumlockmask(void);*/
 
 /* standard funcs */
 void die(const char *fmt, ...)
@@ -57,33 +55,6 @@ void die(const char *fmt, ...)
 
 	exit(1);
 }
-
-/*
-void grabkeys(void)
-{
-	updatenumlockmask();
-	{
-		unsigned int i, j, k;
-		unsigned int modifiers[] = { 0, LockMask, numlockmask, numlockmask|LockMask };
-		int start, end, skip;
-		KeySym *syms;
-
-		XUngrabKey(dpy, AnyKey, AnyModifier, root);
-		XDisplayKeycodes(dpy, &start, &end);
-		syms = XGetKeyboardMapping(dpy, start, end - start + 1, &skip);
-		if (!syms)
-			return;
-		for (k = start; k <= end; k++)
-			for (i = 0; i < LENGTH(keys); i++)
-				if (keys[i].keysym == syms[(k - start) * skip])
-					for (j = 0; j < LENGTH(modifiers); j++)
-						XGrabKey(dpy, k,
-							 keys[i].mod | modifiers[j],
-							 root, True,
-							 GrabModeAsync, GrabModeAsync);
-		XFree(syms);
-	}
-}*/
 
 /* window manager functions */
 void setup(void)
@@ -132,22 +103,6 @@ void setup(void)
 	}
 	grabkeys();
 }
-/*
-void updatenumlockmask(void)
-{
-	unsigned int i, j;
-	XModifierKeymap *modmap;
-
-	numlockmask = 0;
-	modmap = XGetModifierMapping(dpy);
-	for (i = 0; i < 8; i++)
-		for (j = 0; j < modmap->max_keypermod; j++)
-			if (modmap->modifiermap[i * modmap->max_keypermod + j]
-				== XKeysymToKeycode(dpy, XK_Num_Lock))
-				numlockmask = (1 << i);
-	XFreeModifiermap(modmap);
-}*/
-
 
 int main(int argc, char *argv[])
 {
