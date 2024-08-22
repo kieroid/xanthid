@@ -101,7 +101,6 @@ void setup(void)
 			start.subwindow = None;
 		}
 	}
-	grabkeys();
 }
 
 int main(int argc, char *argv[])
