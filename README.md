@@ -8,6 +8,7 @@ for right now, this is primary nicks work, so he should get the recognition he d
 > [!CAUTION]
 > From wikipedia: 
 > *"Xanthid crabs are often brightly coloured and are highly poisonous, containing toxins which are not destroyed by cooking and for which no antidote is known."*
+>
 > **The joke?** Xanthid is my first window manager. It will likely be very bad for your computer (just as Xanthid crabs are for you.)
 
 credits
