@@ -1,18 +1,17 @@
-CC = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os -I/usr/X11R6/include -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\\"6.5\\"
-LDFLAGS = -L/usr/X11R6/lib -lX11
+# xanthid
+
+include config.mk
+
 TARGET = xanthid
-OBJ = xanthid.o
-PREFIX = /usr/local
-BINDIR = $(PREFIX)/bin
+SRC = xanthid.c
+OBJ = ${SRC:.c=.o}
 
-all: $(TARGET)
+all: xanthid
 
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $@ $(LDFLAGS)
+${OBJ}: config.mk
 
-$(OBJ): xanthid.c
-	$(CC) $(CFLAGS) -c xanthid.c -o $(OBJ)
+xanthid: $(OBJ)
+	${CC} ${CFLAGS} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
 	rm -f $(TARGET) $(OBJ)
