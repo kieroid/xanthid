@@ -7,8 +7,9 @@ for right now, this is primary nicks work, so he should get the recognition he d
 
 > [!CAUTION]
 > From wikipedia:<br/>
-> *"Xanthid crabs are often brightly coloured and are highly poisonous, containing toxins which are not destroyed by cooking and for which no antidote is known."*<br/>
-> **The joke?** Xanthid is my first window manager. It will likely be very bad for your computer (just as Xanthid crabs are for you.)
+> *"Xanthid crabs are often brightly coloured and are highly poisonous, containing toxins which are not destroyed by cooking and for which no antidote is known."*<br/><br/>
+> **The joke?** Xanthid is my first window manager. It will likely be very bad for your computer (just as Xanthid crabs are for you.) <br/>
+> Also, I thought that considering X11 is required, it would be funny to name it something starting with X.
 
 todo
 ----
