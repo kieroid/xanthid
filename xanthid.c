@@ -16,16 +16,17 @@
 /* config */
 /* #include "config.h" */
 
+/* definitions */
 #define MAX(A, B)		((A) > (B) ? (A) : (B))
 #define MIN(A, B)		((A) < (B) ? (A) : (B))
 #define BETWEEN(X, A, B)	((A) <= (X) && (X) <= (B))
 
+/* initial static functions */
 static void die(const char *fmt, ...);
-static void *ecalloc(size_t nmemb, size_t size);
+static void setup();
 
 /* standard funcs */
-void
-die(const char *fmt, ...)
+void die(const char *fmt, ...)
 {
 	va_list args;
 
@@ -43,10 +44,10 @@ die(const char *fmt, ...)
 	exit(1);
 }
 
-int main(int argc, char *argv[])
+/* window manager functions */
+
+void setup(void)
 {
-	if (argc == 2 && !strcmp("-v", argv[1]))
-		die("xanthid-%s", VER);
 	Display * dpy;
 	XWindowAttributes attr;
 	XButtonEvent start;
@@ -89,6 +90,20 @@ int main(int argc, char *argv[])
 			start.subwindow = None;
 		}
 	}
+}
+
+int main(int argc, char *argv[])
+{
+	/* extra arguments/settings */
+	if (argc == 2 && !strcmp("-v", argv[1]))
+		die("xanthid-%s", VER);
+	else if (argc != 1)
+		die("usage: xanthid [-v]");
+	
+	/* setup */
+	setup();
+
+	die("Shit broke bro.");
 }
 
 
