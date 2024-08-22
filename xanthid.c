@@ -17,8 +17,8 @@
 /* #include "config.h" */
 
 /* definitions */
-#define MAX(A, B)		((A) > (B) ? (A) : (B))
-#define MIN(A, B)		((A) < (B) ? (A) : (B))
+#define MAX(A, B)			((A) > (B) ? (A) : (B))
+#define MIN(A, B)			((A) < (B) ? (A) : (B))
 #define BETWEEN(X, A, B)	((A) <= (X) && (X) <= (B))
 
 /* initial static functions */
@@ -43,9 +43,36 @@ void die(const char *fmt, ...)
 
 	exit(1);
 }
+/*
+void
+grabkeys(void)
+{
+	updatenumlockmask();
+	{
+		unsigned int i, j, k;
+		unsigned int modifiers[] = { 0, LockMask, numlockmask, numlockmask|LockMask };
+		int start, end, skip;
+		KeySym *syms;
+
+		XUngrabKey(dpy, AnyKey, AnyModifier, root);
+		XDisplayKeycodes(dpy, &start, &end);
+		syms = XGetKeyboardMapping(dpy, start, end - start + 1, &skip);
+		if (!syms)
+			return;
+		for (k = start; k <= end; k++)
+			for (i = 0; i < LENGTH(keys); i++)
+				if (keys[i].keysym == syms[(k - start) * skip])
+					for (j = 0; j < LENGTH(modifiers); j++)
+						XGrabKey(dpy, k,
+							 keys[i].mod | modifiers[j],
+							 root, True,
+							 GrabModeAsync, GrabModeAsync);
+		XFree(syms);
+	}
+}*/
+
 
 /* window manager functions */
-
 void setup(void)
 {
 	Display * dpy;
@@ -53,11 +80,11 @@ void setup(void)
 	XButtonEvent start;
 	XEvent ev;
 
-	if(!(dpy = XOpenDisplay(0x0))) return 1;
-
+	if(!(dpy = XOpenDisplay(0x0))) return;
+	
 	XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F1")), Mod1Mask,
 		DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
-
+	
 	XGrabButton(dpy, 1, Mod1Mask, DefaultRootWindow(dpy), True,
 		ButtonPressMask|ButtonReleaseMask|PointerMotionMask, GrabModeAsync, GrabModeAsync, None, None);
 	XGrabButton(dpy, 3, Mod1Mask, DefaultRootWindow(dpy), True,
@@ -92,6 +119,23 @@ void setup(void)
 	}
 }
 
+/*void
+updatenumlockmask(void)
+{
+	unsigned int i, j;
+	XModifierKeymap *modmap;
+
+	numlockmask = 0;
+	modmap = XGetModifierMapping(dpy);
+	for (i = 0; i < 8; i++)
+		for (j = 0; j < modmap->max_keypermod; j++)
+			if (modmap->modifiermap[i * modmap->max_keypermod + j]
+				== XKeysymToKeycode(dpy, XK_Num_Lock))
+				numlockmask = (1 << i);
+	XFreeModifiermap(modmap);
+}*/
+
+
 int main(int argc, char *argv[])
 {
 	/* extra arguments/settings */
@@ -103,7 +147,7 @@ int main(int argc, char *argv[])
 	/* setup */
 	setup();
 
-	die("Shit broke bro.");
+	die("Shit broke bro...");
 }
 
 

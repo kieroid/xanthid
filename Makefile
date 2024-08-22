@@ -16,6 +16,10 @@ xanthid: $(OBJ)
 clean:
 	rm -f $(TARGET) $(OBJ)
 
+xephyr: all
+	xinit ${XINITRC} -- `which Xephyr` :1 -screen 1024x768
+	rm -f $(TARGET) $(OBJ)
+
 install: $(TARGET)
 	mkdir -p $(BINDIR)
 	cp $(TARGET) $(BINDIR)
@@ -23,4 +27,4 @@ install: $(TARGET)
 uninstall:
 	rm -f $(BINDIR)/$(TARGET)
 
-.PHONY: all clean install uninstall
+.PHONY: all clean install uninstall xephyr
