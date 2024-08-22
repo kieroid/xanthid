@@ -4,17 +4,29 @@
  * and is provided AS IS, with NO WARRANTY. */
 
 /* standard gcc libs */
+#include <errno.h>
+#include <locale.h>
+#include <signal.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /* x11 libs */
+#include <X11/Xatom.h>
+#include <X11/Xft/Xft.h>
 #include <X11/Xlib.h>
+#include <X11/Xproto.h>
+#include <X11/Xutil.h>
+#include <X11/cursorfont.h>
+#include <X11/extensions/Xinerama.h>
 #include <X11/keysym.h>
 
 /* config */
-/* #include "config.h" */
+#include "config.h"
 
 /* definitions */
 #define MAX(A, B)			((A) > (B) ? (A) : (B))
@@ -23,7 +35,9 @@
 
 /* initial static functions */
 static void die(const char *fmt, ...);
-static void setup();
+/* static void grabkeys(void);*/
+static void setup(void);
+/*static void updatenumlockmask(void);*/
 
 /* standard funcs */
 void die(const char *fmt, ...)
@@ -43,9 +57,9 @@ void die(const char *fmt, ...)
 
 	exit(1);
 }
+
 /*
-void
-grabkeys(void)
+void grabkeys(void)
 {
 	updatenumlockmask();
 	{
@@ -71,7 +85,6 @@ grabkeys(void)
 	}
 }*/
 
-
 /* window manager functions */
 void setup(void)
 {
@@ -81,7 +94,7 @@ void setup(void)
 	XEvent ev;
 
 	if(!(dpy = XOpenDisplay(0x0))) return;
-	
+
 	XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F1")), Mod1Mask,
 		DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
 	
@@ -117,10 +130,10 @@ void setup(void)
 			start.subwindow = None;
 		}
 	}
+	grabkeys();
 }
-
-/*void
-updatenumlockmask(void)
+/*
+void updatenumlockmask(void)
 {
 	unsigned int i, j;
 	XModifierKeymap *modmap;
