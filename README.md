@@ -1,14 +1,13 @@
 Xanthid - an X11 window manager based on TinyWM
 ===============================================
 
-hi thanks for reading this. this is a window manager im developing. it is based on tinywm which is made by nick welch.
-im making it public domain (for now) until i achieve something that is usable. 
-for right now, this is primary nicks work, so he should get the recognition he deserves.
+hi thanks for reading this. this is a window manager im developing. it is based on tinywm which is made by nick welch.<br/>
+im making it public domain (for now) until i achieve something that is usable.<br/>
+for right now, this is primary nicks work, so he should get the recognition he deserves.<br/>
 
 > [!CAUTION]
-> From wikipedia: 
-> *"Xanthid crabs are often brightly coloured and are highly poisonous, containing toxins which are not destroyed by cooking and for which no antidote is known."*
->
+> From wikipedia:<br/>
+> *"Xanthid crabs are often brightly coloured and are highly poisonous, containing toxins which are not destroyed by cooking and for which no antidote is known."*<br/>
 > **The joke?** Xanthid is my first window manager. It will likely be very bad for your computer (just as Xanthid crabs are for you.)
 
 todo
@@ -19,6 +18,12 @@ todo
 - [ ] add support for keybinds
 - [ ] add a bar to show information
 - [ ] support for multiple workspaces for efficient workflow
+
+installation
+------------
+to install, edit the makefile and type `sudo make install`.<br/>
+to compile, type `make`, and to clean the repo, type `make clean`.<br/>
+have fun and good luck
 
 credits
 -------
