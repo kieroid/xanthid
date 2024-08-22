@@ -11,6 +11,15 @@ for right now, this is primary nicks work, so he should get the recognition he d
 >
 > **The joke?** Xanthid is my first window manager. It will likely be very bad for your computer (just as Xanthid crabs are for you.)
 
+todo
+----
+- [x] update makefile for easier configurability and installation
+- [ ] seperate configuration file for better customization of constraints
+- [ ] add tiling system that prevents windows from moving
+- [ ] add support for keybinds
+- [ ] add a bar to show information
+- [ ] support for multiple workspaces for efficient workflow
+
 credits
 -------
 * TinyWM is written by Nick Welch <mack@incise.org>, 2005.
