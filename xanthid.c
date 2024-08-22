@@ -43,17 +43,6 @@ die(const char *fmt, ...)
 	exit(1);
 }
 
-
-void *
-ecalloc(size_t nmemb, size_t size)
-{
-	void *p;
-
-	if (!(p = calloc(nmemb, size)))
-		die("calloc:");
-	return p;
-}
-
 int main(int argc, char *argv[])
 {
 	if (argc == 2 && !strcmp("-v", argv[1]))
