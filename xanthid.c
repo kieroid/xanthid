@@ -57,7 +57,7 @@ void die(const char *fmt, ...)
 		fputc(' ', stderr);
 		perror(NULL);
 	} else {
-		fputc('\\n', stderr);
+		fputc('\n', stderr);
 	}
 
 	exit(1);
