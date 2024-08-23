@@ -1,5 +1,5 @@
 # version of xanthid
-VER		= 0.0.1
+VER		= 0.0.2
 
 # compiler type
 CC		= gcc

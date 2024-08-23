@@ -64,8 +64,8 @@ void die(const char *fmt, ...)
 }
 
 void run(void) {
-XEvent ev;
-while (!XNextEvent(dpy, &ev)) {
+	XEvent ev;
+	while (!XNextEvent(dpy, &ev)) {
 		if (ev.type == KeyPress) {
 			if (ev.xkey.subwindow != None) {
 				XRaiseWindow(dpy, ev.xkey.subwindow);
@@ -108,7 +108,7 @@ void setup(void)
 
 int main(int argc, char *argv[])
 {
-/* extra arguments/settings */
+	/* extra arguments/settings */
 	if (argc == 2 && !strcmp("-v", argv[1]))
 		die("xanthid-%s", VER);
 	else if (argc != 1)
