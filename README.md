@@ -14,6 +14,7 @@ for right now, this is primary nicks work, so he should get the recognition he d
 todo
 ----
 - [x] update makefile for easier configurability and installation
+- [x] add xephyr to makefile for easier testing
 - [ ] seperate configuration file for better customization of constraints
 - [ ] add tiling system that prevents windows from moving
 - [ ] add support for keybinds
@@ -24,6 +25,7 @@ installation
 ------------
 to install, edit the makefile and type `sudo make install`.<br/>
 to compile, type `make`, and to clean the repo, type `make clean`.<br/>
+to test xanthid, type `make xephyr`. ensure you have xephyr installed.<br/>
 have fun and good luck
 
 credits

@@ -17,8 +17,10 @@ clean:
 	rm -f $(TARGET) $(OBJ)
 
 xephyr: all
-	xinit ${XINITRC} -- `which Xephyr` :1 -screen 1024x768
-	rm -f $(TARGET) $(OBJ)
+	Xephyr -br -ac -noreset -screen 1024x768 :1 &
+	sleep 2
+	DISPLAY=:1 ./xanthid &
+	DISPLAY=:1 xterm
 
 install: $(TARGET)
 	mkdir -p $(BINDIR)

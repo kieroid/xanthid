@@ -36,9 +36,12 @@
 /* global vars */
 Display *dpy;
 Window root;
+XWindowAttributes attr;
+XButtonEvent start;
 
 /* initial static functions */
 static void die(const char *fmt, ...);
+static void run(void);
 static void setup(void);
 
 /* standard funcs */
@@ -54,10 +57,38 @@ void die(const char *fmt, ...)
 		fputc(' ', stderr);
 		perror(NULL);
 	} else {
-		fputc('\n', stderr);
+		fputc('\\n', stderr);
 	}
 
 	exit(1);
+}
+
+void run(void) {
+XEvent ev;
+while (!XNextEvent(dpy, &ev)) {
+		if (ev.type == KeyPress) {
+			if (ev.xkey.subwindow != None) {
+				XRaiseWindow(dpy, ev.xkey.subwindow);
+			}
+		} else if (ev.type == ButtonPress) {
+			if (ev.xbutton.subwindow != None) {
+				XGetWindowAttributes(dpy, ev.xbutton.subwindow, &attr);
+				start = ev.xbutton;
+			}
+		} else if (ev.type == MotionNotify) {
+			if (start.subwindow != None) {
+				int xdiff = ev.xbutton.x_root - start.x_root;
+				int ydiff = ev.xbutton.y_root - start.y_root;
+				XMoveResizeWindow(dpy, start.subwindow,
+					attr.x + (start.button==1 ? xdiff : 0),
+					attr.y + (start.button==1 ? ydiff : 0),
+					MAX(1, attr.width + (start.button==3 ? xdiff : 0)),
+					MAX(1, attr.height + (start.button==3 ? ydiff : 0)));
+			}
+		} else if (ev.type == ButtonRelease) {
+			start.subwindow = None;
+		}
+	}
 }
 
 /* window manager functions */
@@ -77,12 +108,15 @@ void setup(void)
 
 int main(int argc, char *argv[])
 {
-	/* extra arguments/settings */
+/* extra arguments/settings */
 	if (argc == 2 && !strcmp("-v", argv[1]))
 		die("xanthid-%s", VER);
 	else if (argc != 1)
 		die("usage: xanthid [-v]");
-	
+
 	/* setup */
 	setup();
+
+	/* run */
+	run();
 }
