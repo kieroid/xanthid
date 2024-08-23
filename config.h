@@ -1,0 +1,1 @@
+#define MODKEY Mod4Mask
