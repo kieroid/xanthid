@@ -63,28 +63,27 @@ void die(const char *fmt, ...)
 	exit(1);
 }
 
+void XMotionNotify(XEvent ev) {
+	int xdiff = ev.xbutton.x_root - start.x_root;
+	int ydiff = ev.xbutton.y_root - start.y_root;
+	XMoveResizeWindow(dpy, start.subwindow,
+	attr.x + (start.button==1 ? xdiff : 0),
+	attr.y + (start.button==1 ? ydiff : 0),
+	MAX(1, attr.width + (start.button==3 ? xdiff : 0)),
+	MAX(1, attr.height + (start.button==3 ? ydiff : 0)));
+	printf("bruh");
+}
+
 void run(void) {
 	XEvent ev;
 	while (!XNextEvent(dpy, &ev)) {
-		if (ev.type == KeyPress) {
-			if (ev.xkey.subwindow != None) {
-				XRaiseWindow(dpy, ev.xkey.subwindow);
-			}
-		} else if (ev.type == ButtonPress) {
-			if (ev.xbutton.subwindow != None) {
-				XGetWindowAttributes(dpy, ev.xbutton.subwindow, &attr);
-				start = ev.xbutton;
-			}
-		} else if (ev.type == MotionNotify) {
-			if (start.subwindow != None) {
-				int xdiff = ev.xbutton.x_root - start.x_root;
-				int ydiff = ev.xbutton.y_root - start.y_root;
-				XMoveResizeWindow(dpy, start.subwindow,
-					attr.x + (start.button==1 ? xdiff : 0),
-					attr.y + (start.button==1 ? ydiff : 0),
-					MAX(1, attr.width + (start.button==3 ? xdiff : 0)),
-					MAX(1, attr.height + (start.button==3 ? ydiff : 0)));
-			}
+		if (ev.type == KeyPress && ev.xkey.subwindow != None) {
+			XRaiseWindow(dpy, ev.xkey.subwindow);
+		} else if (ev.type == ButtonPress && ev.xbutton.subwindow != None) {
+			XGetWindowAttributes(dpy, ev.xbutton.subwindow, &attr);
+			start = ev.xbutton;
+		} else if (ev.type == MotionNotify && start.subwindow != None) {
+			XMotionNotify(ev);
 		} else if (ev.type == ButtonRelease) {
 			start.subwindow = None;
 		}
